@@ -334,7 +334,10 @@ const DEMO_MENUS = [
 // ══════════════════════════════
 window.onload = () => {
   const saved = localStorage.getItem('gasUrl');
-  if (saved) { GAS_URL = saved; boot(); }
+  GAS_URL = (saved && saved.trim()) ? saved.trim() : DEFAULT_GAS_URL;
+  const setupInput = document.getElementById('setupUrl');
+  if (setupInput) setupInput.value = GAS_URL;
+  boot();
 };
 
 function startApp() {
