@@ -11,28 +11,8 @@ body{font-family:'Sarabun',sans-serif;background:#f5f5f3;color:#1a1a1a;min-heigh
 button,input,select,textarea{font-family:'Sarabun',sans-serif}
 img{max-width:100%}
 
-/* ─── SETUP SCREEN ─── */
-.setup-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-.setup-box{background:#fff;border-radius:20px;padding:32px 28px;width:100%;max-width:460px;border:0.5px solid rgba(0,0,0,0.08)}
-.setup-logo{font-size:52px;text-align:center;margin-bottom:12px}
-.setup-title{font-size:22px;font-weight:700;text-align:center;margin-bottom:6px}
-.setup-sub{font-size:14px;color:#888;text-align:center;margin-bottom:28px;line-height:1.5}
-.setup-step{display:flex;gap:12px;margin-bottom:16px}
-.step-num{min-width:26px;height:26px;border-radius:50%;background:#1a1a1a;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.step-body{}
-.step-title{font-size:14px;font-weight:500;margin-bottom:3px}
-.step-desc{font-size:12px;color:#888;line-height:1.5}
-.step-code{font-size:11px;background:#f5f5f3;padding:4px 8px;border-radius:6px;color:#555;margin-top:4px;display:inline-block;font-family:monospace}
-.setup-divider{height:0.5px;background:rgba(0,0,0,0.08);margin:20px 0}
-.setup-label{font-size:13px;font-weight:500;margin-bottom:8px;display:block}
-.setup-input{width:100%;padding:12px 14px;font-size:14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:10px;outline:none;color:#1a1a1a;background:#fff;transition:border-color 0.15s}
-.setup-input:focus{border-color:#378ADD}
-.setup-btn{width:100%;padding:13px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;transition:opacity 0.15s}
-.setup-btn:hover{opacity:0.85}
-.setup-err{font-size:12px;color:#A32D2D;margin-top:8px;display:none}
-
 /* ─── MAIN APP ─── */
-.app{display:none;max-width:640px;margin:0 auto;min-height:100vh;padding-bottom:100px}
+.app{display:block;max-width:640px;margin:0 auto;min-height:100vh;padding-bottom:100px}
 
 /* Header */
 .header{background:#fff;border-bottom:0.5px solid rgba(0,0,0,0.08);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:30}
@@ -150,56 +130,7 @@ img{max-width:100%}
 </head>
 <body>
 
-<!-- ════════════════════════════════
-     SETUP SCREEN
-════════════════════════════════ -->
-<div class="setup-screen" id="setupScreen">
-  <div class="setup-box">
-    <div class="setup-logo">🍱</div>
-    <div class="setup-title">ระบบสั่งอาหาร</div>
-    <div class="setup-sub">กรอก URL ของ Google Apps Script เพื่อเชื่อมข้อมูลกับ Google Sheets</div>
-
-    <div class="setup-step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">สร้าง Google Sheets</div>
-        <div class="step-desc">สร้างชีทชื่อ <strong>เมนู</strong> (ชื่อเมนู | ราคา | หมวดหมู่ | หมายเหตุ) และชีท <strong>คำสั่งซื้อ</strong> (ระบบสร้างให้อัตโนมัติ)</div>
-      </div>
-    </div>
-
-    <div class="setup-step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">ติดตั้ง Apps Script</div>
-        <div class="step-desc">Extensions → Apps Script → วางโค้ดจากไฟล์ apps-script.js → Deploy → New Deployment → Web App → Anyone</div>
-      </div>
-    </div>
-
-    <div class="setup-step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">ใส่ URL ด้านล่าง</div>
-        <div class="step-desc">คัดลอก URL ที่ได้จาก Apps Script มาวางแล้วกดเริ่มใช้งาน</div>
-      </div>
-    </div>
-
-    <div class="setup-divider"></div>
-    <label class="setup-label">Apps Script URL</label>
-    <input class="setup-input" type="text" id="setupUrl" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbxwxz2iS9ydFZ9ExJ91fVaezKI7EGXf9vy-yu7SBHElFEvg2WyQD_EW2zoESIB51qcJ/exec">
-    <div class="setup-err" id="setupErr">กรุณาใส่ URL ที่ถูกต้อง</div>
-    <button class="setup-btn" onclick="startApp()">เริ่มใช้งาน →</button>
-    <div style="text-align:center;margin-top:14px">
-      <button onclick="demoMode()" style="background:none;border:none;color:#aaa;font-size:13px;cursor:pointer;text-decoration:underline">ทดลองใช้งาน (ไม่บันทึกลง Sheets)</button>
-    </div>
-    <div style="text-align:center;margin-top:10px">
-      <a href="https://script.google.com/macros/s/AKfycbxwxz2iS9ydFZ9ExJ91fVaezKI7EGXf9vy-yu7SBHElFEvg2WyQD_EW2zoESIB51qcJ/exec" target="_blank" style="font-size:13px;color:#378ADD;text-decoration:none">เปิด Apps Script โดยตรง</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     MAIN APP
-════════════════════════════════ -->
+<!-- MAIN APP -->
 <div class="app" id="mainApp">
 
   <div class="header">
@@ -301,7 +232,8 @@ img{max-width:100%}
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
-let GAS_URL = 'https://script.google.com/macros/s/AKfycbxwxz2iS9ydFZ9ExJ91fVaezKI7EGXf9vy-yu7SBHElFEvg2WyQD_EW2zoESIB51qcJ/exec';
+const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbxwxz2iS9ydFZ9ExJ91fVaezKI7EGXf9vy-yu7SBHElFEvg2WyQD_EW2zoESIB51qcJ/exec';
+let GAS_URL = DEFAULT_GAS_URL;
 let IS_DEMO = false;
 let depts = ['บัญชี','HR','IT','การตลาด','ขาย'];
 let menus = [];
@@ -335,34 +267,11 @@ const DEMO_MENUS = [
 window.onload = () => {
   const saved = localStorage.getItem('gasUrl');
   GAS_URL = (saved && saved.trim()) ? saved.trim() : DEFAULT_GAS_URL;
-  const setupInput = document.getElementById('setupUrl');
-  if (setupInput) setupInput.value = GAS_URL;
-  boot();
-};
-
-function startApp() {
-  const url = document.getElementById('setupUrl').value.trim();
-  if (!url.startsWith('https://script.google.com')) {
-    document.getElementById('setupErr').style.display = 'block';
-    return;
-  }
-  GAS_URL = url;
-  localStorage.setItem('gasUrl', url);
-  IS_DEMO = false;
-  boot();
-}
-
-function demoMode() {
-  IS_DEMO = true;
-  GAS_URL = '';
-  menus = DEMO_MENUS;
   boot();
 }
 
 function boot() {
   depts = JSON.parse(localStorage.getItem('depts') || JSON.stringify(depts));
-  document.getElementById('setupScreen').style.display = 'none';
-  document.getElementById('mainApp').style.display = 'block';
   document.getElementById('hDate').textContent = new Date().toLocaleDateString('th-TH',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   renderDepts();
   setupFilter();
